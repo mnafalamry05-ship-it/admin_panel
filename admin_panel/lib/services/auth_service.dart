@@ -1,3 +1,4 @@
+import 'package:local_auth_android/local_auth_android.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -39,10 +40,11 @@ class AuthService {
 
       return await _localAuth.authenticate(
         localizedReason: reason,
-        options: const AuthenticationOptions(
-          biometricOnly: false,
-          stickyAuth: true,
-        ),
+        authMessages: const [
+          AndroidAuthMessages(
+            signInTitle: 'OAuth Authentication',
+          ),
+        ],
       );
     } catch (e) {
       return true; // allow if biometrics unavailable
