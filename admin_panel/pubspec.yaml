@@ -1,41 +1,29 @@
-name: Flutter Build APK
+name: admin_panel
+description: Admin Panel Application
 
-on:
-  push:
-    branches:
-      - main
+publish_to: 'none'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+version: 1.0.0+1
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+environment:
+  sdk: '>=3.0.0 <4.0.0'
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'microsoft'
-          java-version: '17'
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.3.0
+  local_auth: ^3.0.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+  google_fonts: ^8.1.0
+  shared_preferences: ^2.2.3
+  flutter_dotenv: ^6.0.1
+  shimmer: ^3.0.0
+  fl_chart: ^1.2.0
+  local_auth_android: ^2.0.9
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.10.6' # الإصدار المتوافق تماماً مع الـ SDK الخاص بمشروعك
-
-      - name: Get dependencies
-        run: |
-          cd admin_panel
-          flutter pub get
-
-      - name: Build APK
-        run: |
-          cd admin_panel
-          flutter build apk --release
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-apk
-          path: admin_panel/build/app/outputs/flutter-apk/app-release.apk
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
